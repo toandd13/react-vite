@@ -1,12 +1,14 @@
 import { useState } from "react";
 
 const TodoNew = (props) => {
-    const { AddNewTodo } = props;
     //userState hook(getter setter)
     const [valueInput, setValueInput] = useState("Eric")
     // AddNewTodo("Eric")
+
+    const { AddNewTodo } = props;
+
     const handleClick = () => {
-        console.log("checked value input", valueInput)
+        AddNewTodo(valueInput)
 
     }
     const handleOnChange = (name) => {
