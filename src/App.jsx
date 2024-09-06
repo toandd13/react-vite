@@ -1,8 +1,8 @@
 import './components/todo/todo.css'
 import TodoData from './components/todo/todoData'
-import TodoNew from './components/todo/todoNew'
 import reactLogo from './assets/react.svg'
 import { useState } from 'react'
+import TodoNew from './components/todo/todoNew'
 const App = () => {
 
   const [todoList, setTodoList] = useState([
@@ -21,9 +21,11 @@ const App = () => {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
 
+  const todoDelete = (id) => {
+    const newTodo = todoList.filter(item => item.id !== id)
+    setTodoList(newTodo);
 
-
-
+  }
 
 
   return (
@@ -36,6 +38,7 @@ const App = () => {
       {todoList.length > 0 ?
         <TodoData
           todoList={todoList}
+          todoDelete={todoDelete}
         />
         :
         <div className='todo-img'>
