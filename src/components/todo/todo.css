@@ -33,3 +33,8 @@
     padding: 20px;
     margin-left: 250px;
 }
+
+.todo-item {
+    display: flex;
+    justify-content: space-between;
+}
