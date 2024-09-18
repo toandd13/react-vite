@@ -2,7 +2,8 @@ import { Button, Flex, Input, notification, Modal } from "antd"
 import { useState } from "react"
 import { createUserApi } from "../../service/api.service";
 
-const UserForm = () => {
+const UserForm = (props) => {
+    const { loadUser } = props
     const [fullName, setFullName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -15,13 +16,24 @@ const UserForm = () => {
                 message: "create user",
                 description: "Tạo mới user thành công"
             })
-            setIsModalOpen(false)
+            resetAndCloseModal()
+            await loadUser()
         } else {
             notification.error({
                 message: "error create user",
                 description: JSON.stringify(res.message)
             })
         }
+
+    }
+
+    const resetAndCloseModal = () => {
+        setIsModalOpen(false)
+        setFullName("");
+        setEmail("");
+        setPassword("");
+        setPhone("");
+
 
     }
 
@@ -40,7 +52,7 @@ const UserForm = () => {
                 title="CREATE USER"
                 open={isModalOpen}
                 onOk={() => handleSubmit()}
-                onCancel={() => setIsModalOpen(false)}
+                onCancel={() => resetAndCloseModal()}
                 maskClosable={false}
                 okText="CREATE"
             >
