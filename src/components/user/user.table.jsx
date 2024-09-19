@@ -1,10 +1,12 @@
 import { Space, Table, Tag } from 'antd';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import UpdateUserModal from './update.user.modal';
+import { useState } from 'react';
 
 const UserTable = (props) => {
-    const { dataUser } = props
-
+    const { dataUser, loadUser } = props;
+    const [isModelUpdate, setIsModelUpdate] = useState(false);
+    const [dataUpdate, setDataUpdate] = useState(null);
     const columns = [
         {
             title: 'Id',
@@ -27,20 +29,38 @@ const UserTable = (props) => {
         {
             title: 'Action',
             key: 'action',
-            render: (_, record) => (
-                <div style={{ display: "flex", gap: "20px" }}>
-                    <DeleteOutlined style={{ cursor: "pointer", color: "orange" }} />
-                    <EditOutlined style={{ cursor: "pointer", color: "red" }} />
-                </div>
-            ),
+            render: (_, record) => {
+                return (
+                    <div style={{ display: "flex", gap: "20px" }}>
+                        <EditOutlined
+                            onClick={() => {
+                                setDataUpdate(record);
+                                setIsModelUpdate(true);
+                            }}
+                            style={{ cursor: "pointer", color: "red" }}
+                        />
+                        <DeleteOutlined style={{ cursor: "pointer", color: "orange" }} />
+                    </div>
+                )
+            },
+
+
         },
 
     ];
-
     return (
         <>
-            <Table columns={columns} dataSource={dataUser} rowKey={"_id"} />
-            <UpdateUserModal />
+            <Table
+                columns={columns}
+                dataSource={dataUser}
+                rowKey={"_id"} />
+            <UpdateUserModal
+                loadUser={loadUser}
+                isModelUpdate={isModelUpdate}
+                setIsModelUpdate={setIsModelUpdate}
+                dataUpdate={dataUpdate}
+                setDataUpdate={setDataUpdate}
+            />
         </>
     )
 }
