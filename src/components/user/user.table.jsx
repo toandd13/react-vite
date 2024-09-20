@@ -2,18 +2,27 @@ import { Space, Table, Tag } from 'antd';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import UpdateUserModal from './update.user.modal';
 import { useState } from 'react';
+import DetailUserModal from './detail.user.modal';
 
 const UserTable = (props) => {
     const { dataUser, loadUser } = props;
     const [isModelUpdate, setIsModelUpdate] = useState(false);
     const [dataUpdate, setDataUpdate] = useState(null);
+
+    const [dataDetail, setDateDetail] = useState(null)
+    const [isDetailOpen, setIsDetailOpen] = useState(false)
     const columns = [
         {
             title: 'Id',
             dataIndex: '_id',
             render: (_, record) => {
                 return (
-                    <a href='#'>{record._id}</a>
+                    <a href='#'
+                        onClick={() => {
+                            setDateDetail(record);
+                            setIsDetailOpen(true);
+                        }}
+                    >{record._id}</a>
                 )
             }
         },
@@ -60,6 +69,12 @@ const UserTable = (props) => {
                 setIsModelUpdate={setIsModelUpdate}
                 dataUpdate={dataUpdate}
                 setDataUpdate={setDataUpdate}
+            />
+            <DetailUserModal
+                dataDetail={dataDetail}
+                setDateDetail={setDateDetail}
+                isDetailOpen={isDetailOpen}
+                setIsDetailOpen={setIsDetailOpen}
             />
         </>
     )
