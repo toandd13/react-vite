@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { Input, notification, Modal } from "antd"
-import { createUserApi, updateUserApi } from "../../service/api.service"
+import { updateUserApi } from "../../service/api.service"
 const UpdateUserModal = (props) => {
     const [id, setId] = useState("");
     const [fullName, setFullName] = useState("");
