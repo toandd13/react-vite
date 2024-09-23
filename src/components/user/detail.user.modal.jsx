@@ -44,7 +44,7 @@ const DetailUserModal = (props) => {
             } else {
                 notification.error({
                     message: "Error Upload Avatar",
-                    description: JSON.stringify(resUpload.message)
+                    description: JSON.stringify(resUpdateAvatar.message)
                 })
             }
 

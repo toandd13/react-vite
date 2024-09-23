@@ -44,7 +44,7 @@ const handleUploadFile = (file, folder) => {
 }
 
 const updateUserAvatarApi = (avatar, _id, fullName, phone) => {
-    const URL_BACKEND = "/api/v1/user";
+    const URL_BACKEND = "/api/v1/user?current=1&pageSize=1";
     const data = {
         _id: _id,
         fullName: fullName,
