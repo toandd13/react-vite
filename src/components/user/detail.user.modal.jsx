@@ -1,7 +1,7 @@
 import { Button, Drawer, notification } from "antd"
 import { useState } from "react"
 import { handleUploadFile, updateUserAvatarApi } from "../../service/api.service"
-// import { useState } from "react"
+
 
 const DetailUserModal = (props) => {
     const { dataDetail, setDateDetail, isDetailOpen, setIsDetailOpen, loadUser } = props

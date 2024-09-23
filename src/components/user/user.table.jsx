@@ -6,7 +6,7 @@ import DetailUserModal from './detail.user.modal';
 import { deleteUserAPI } from '../../service/api.service';
 
 const UserTable = (props) => {
-    const { dataUser, loadUser } = props;
+    const { dataUser, loadUser, current, pageSize, total, setCurrent, setPageSize } = props;
     const [isModelUpdate, setIsModelUpdate] = useState(false);
     const [dataUpdate, setDataUpdate] = useState(null);
 
@@ -96,13 +96,25 @@ const UserTable = (props) => {
 
     }
 
+    const onChange = (pagination, filters, sorter, extra) => { };
 
     return (
         <>
             <Table
                 columns={columns}
                 dataSource={dataUser}
-                rowKey={"_id"} />
+                rowKey={"_id"}
+                pagination={
+                    {
+                        current: current,
+                        pageSize: pageSize,
+                        showSizeChanger: true,
+                        total: total,
+                        showTotal: (total, range) => { return (<div> {range[0]}-{range[1]} trên {total} rows</div>) }
+                    }}
+                onChange={onChange}
+
+            />
             <UpdateUserModal
                 loadUser={loadUser}
                 isModelUpdate={isModelUpdate}

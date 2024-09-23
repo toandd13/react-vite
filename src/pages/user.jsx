@@ -5,13 +5,19 @@ import { useEffect, useState } from 'react';
 const UserPage = () => {
 
     const [dataUser, setDataUser] = useState([]);
+    const [current, setCurrent] = useState(1);
+    const [pageSize, setPageSize] = useState(5);
+    const [total, setTotal] = useState(0)
     useEffect(() => {
         loadUser();
     }, []);
 
     const loadUser = async () => {
-        const res = await fetchAllUserAPI()
-        setDataUser(res.data)
+        const res = await fetchAllUserAPI(current, pageSize)
+        setDataUser(res.data.result)
+        setCurrent(res.data.meta.current)
+        setPageSize(res.data.meta.pageSize)
+        setTotal(res.data.meta.total)
     }
 
     return (
@@ -19,7 +25,14 @@ const UserPage = () => {
             <UserForm loadUser={loadUser} />
             <UserTable
                 loadUser={loadUser}
-                dataUser={dataUser} />
+                dataUser={dataUser}
+                current={current}
+                pageSize={pageSize}
+                total={total}
+                setCurrent={setCurrent}
+                setPageSize={setPageSize}
+            />
+
         </div>
     )
 }
